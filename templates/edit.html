@@ -1,0 +1,136 @@
+<div class="container">
+
+    
+    
+    <div class="container">
+          <div class="row" ng-hide="ctrl.offers.length==0">
+            <div class="col-md-12">
+
+              <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left">Offerta</div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-content">
+                  <div class="padd invoice">
+                    
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <h4><strong>Customer</strong></h4>
+                        <select ng-model="ctrl.item.customer"
+                            ng-options="c as c.nome for c in ctrl.clienti track by c.customer_id">
+                        </select>
+                      </div>
+
+                      <div class="col-md-4">
+                        <h4><strong>Offerta</strong></h4>
+                        <p>
+                          <strong>Offerta No</strong> : {{ctrl.item.id}}<br>
+                          <strong>Creata il</strong> : {{ctrl.item.created}}<br>
+                        </p>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-12">
+                        <hr />
+                        <table class="table table-striped table-hover table-bordered">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Nome</th>
+                              <th>Unità</th>
+                              <th>Prezzo unitario</th>
+                              <th>Totale</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="prod in ctrl.item.items track by prod.id">
+                              <td ng-bind="prod.id"></td>
+                              <td ng-bind="prod.detail.nome">
+                              </td>
+                              <td>
+                              <input type="number" min="1" ng-model="prod.quantity" />
+                              </td>
+                              <td ng-bind="prod.detail.prezzo | currency:'€'"></td>
+                              <td ng-bind="ctrl.hlp.getProdTotal(prod) | currency:'€'"></td>
+                              <td>
+                                    <a class="btn btn-xs btn-danger" ng-href=""
+                                        ng-click="ctrl.deleteProd(prod,ctrl.item)" >
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                              </td>
+                            </tr> 
+                            <tr>
+                              <td ng-bind="ctrl.newProd.id"></td>
+                              <td>
+                                 <select ng-model="ctrl.newProd.detail"
+								 ng-options="m as m.nome for m in ctrl.macchine">
+								 </select>
+                              </td>
+                              <td>
+                                <input type="number"  min="0" ng-model="ctrl.newProd.quantity" />
+                              </td>
+                              <td ng-bind="ctrl.newProd.detail.prezzo | currency:'€'"></td>
+                              <td ng-bind="ctrl.hlp.getProdTotal(ctrl.newProd) | currency:'€'"></td>
+                              <td>
+                                    <a class="btn btn-xs btn-success" ng-href=""
+                                        ng-click="ctrl.addProd(ctrl.newProd)" >
+                                        <i class="fa fa-save"></i>
+                                    </a>
+                              </td>
+                            </tr> 
+                            <tr ng-show="ctrl.item.items.length>0">  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Totale</strong></td>
+                              <td><strong ng-bind="ctrl.hlp.getTotal(ctrl.item) | currency:'€'"></strong></td>
+                            </tr>    
+                            <tr ng-show="ctrl.item.items.length>0">  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Sconto</strong></td>
+                              <td>
+                              <input type="text" ng-model="ctrl.item.discount" placeholder="Inserisci sconto">
+                              <select ng-model="ctrl.item.discount_type">
+                                <option value="none">Nessuno</option>
+                                <option value="percentage">%</option>
+                                <option value="absolute">€</option>
+                              </select>
+                              </td>
+                            </tr>  
+                            <tr ng-show="ctrl.item.items.length>0">  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Totale scontato</strong></td>
+                              <td><strong ng-bind="ctrl.hlp.getDiscountedTotal(ctrl.item) | currency:'€'"></strong></td>
+                            </tr>  
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div class="widget-foot">
+                    <div class=" pull-right">
+				        <a ng-click="ctrl.saveOffer()" class="btn btn-danger">Salva offerta</a>
+                        <a ng-href="#/offers" class="btn btn-default">Indietro</a>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>  
+              
+            </div>
+          </div>
+        </div>
+</div>

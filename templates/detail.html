@@ -1,0 +1,106 @@
+<div class="container">
+
+    
+    
+    <div class="container">
+          <div class="row" ng-hide="ctrl.offers.length==0">
+            <div class="col-md-12">
+
+              <div class="widget">
+                <div class="widget-head">
+                  <div class="pull-left">Offerta</div>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="widget-content">
+                  <div class="padd invoice">
+                    
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <h4><strong>{{ctrl.item.customer.nome}}</strong></h4>
+                        <p>
+                          19/133, New New York Street<br>
+                          Near Bus Stop, Right side <br>
+                          Mexico, NY - 63442<br>
+                          USA
+                        </p>
+                      </div>
+
+                      <div class="col-md-4">
+                        <h4><strong>Offerta</strong></h4>
+                        <p>
+                          <strong>Offerta No</strong> : {{ctrl.item.id}}<br>
+                          <strong>Date</strong> : {{ctrl.item.created}}<br>
+                        </p>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-12">
+                        <hr />
+                        <table class="table table-striped table-hover table-bordered">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Nome</th>
+                              <th>Unità</th>
+                              <th>Prezzo unitario</th>
+                              <th>Totale</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="prod in ctrl.item.items">
+                              <td ng-bind="prod.id"></td>
+                              <td ng-bind="prod.detail.nome"></td>
+                              <td ng-bind="prod.quantity"></td>
+                              <td ng-bind="prod.detail.prezzo | currency:'€'"></td>
+                              <td ng-bind="ctrl.hlp.getProdTotal(prod) | currency:'€'"></td>
+                            </tr> 
+                            <tr>  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Totale</strong></td>
+                              <td><strong ng-bind="ctrl.total | currency:'€'"></strong></td>
+                            </tr>    
+                            <tr>  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Sconto</strong></td>
+                              <td>
+                              <strong ng-bind="ctrl.item.discount | discount:ctrl.item.discount_type:'€'"></strong>
+                              </td>
+                            </tr>  
+                            <tr>  
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong>Totale scontato</strong></td>
+                              <td><strong ng-bind="ctrl.discountedTotal | currency:'€'"></strong></td>
+                            </tr>  
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                  <div class="widget-foot">
+                    <div class=" pull-right">
+				        <a ng-href="#/edit/{{ctrl.item.id}}" class="btn btn-danger">Modifica offerta</a>
+                        <a class="btn btn-info">Scarica offerta</a> 
+                        <a ng-href="#/offers" class="btn btn-default">Indietro</a>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>  
+              
+            </div>
+          </div>
+        </div>
+</div>
